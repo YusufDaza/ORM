@@ -3,16 +3,35 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 
 // The `/api/products` endpoint
 
-// get all products
-router.get('/', (req, res) => {
-  // find all products
-  // be sure to include its associated Category and Tag data
+//http://localhost:3001/api/categories/
+router.get('/', async (req, res) =>{
+  try{
+    const productData = await Product.findAll({
+      // Add Book as a second model to JOIN with
+      include: [{model:Category},{model:Tag,through: ProductTag}],
+    });
+    res.status(200).json(productData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
-// get one product
-router.get('/:id', (req, res) => {
-  // find a single product by its `id`
-  // be sure to include its associated Category and Tag data
+//http://localhost:3001/api/categories/1
+router.get('/:id', async (req, res) => {
+  try {
+    const ProductData = await Product.findByPk(req.params.ed, {
+      // Add Book as a second model to JOIN with
+      include: [{ model: Category },{model: Tag, through: ProductTag}],
+    });
+
+    if (!categoryData) {
+      res.status(404).json({ message: 'No reader found with that id!' });
+    }
+
+    res.status(200).json(categoryData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 // create new product
