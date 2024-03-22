@@ -3,7 +3,7 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 
 // The `/api/products` endpoint
 
-//http://localhost:3001/api/categories/
+//http://localhost:3001/api/products/
 router.get('/', async (req, res) =>{
   try{
     const productData = await Product.findAll({
@@ -16,7 +16,7 @@ router.get('/', async (req, res) =>{
   }
 });
 
-//http://localhost:3001/api/categories/1
+//http://localhost:3001/api/products/1
 router.get('/:id', async (req, res) => {
   try {
     const ProductData = await Product.findByPk(req.params.ed, {
