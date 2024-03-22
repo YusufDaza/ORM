@@ -32,7 +32,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-//http:localhost:3001/api/categories/
+//http:localhost:3001/api/categories/3
 router.post('/', async (req, res) =>{
   try{
     const categoryData = await Category.create(req.body);
